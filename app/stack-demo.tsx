@@ -5,6 +5,12 @@ export default function StackDemoScreen() {
   const router = useRouter();
   const { nombre, edad } = useLocalSearchParams();
 
+  const handleBack = (): void => {
+    if (router.canGoBack()) {
+      router.back();
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Pantalla de Navegación por Pila</Text>
@@ -13,10 +19,11 @@ export default function StackDemoScreen() {
       </Text>
       {nombre || edad ? (
         <Text style={styles.subtitle}>
-          Parámetros recibidos: {nombre ? `Nombre: ${nombre}` : ""} {edad ? `Edad: ${edad}` : ""}
+          Parámetros recibidos: {nombre ? `Nombre: ${nombre}` : ""}{" "}
+          {edad ? `Edad: ${edad}` : ""}
         </Text>
       ) : null}
-      <Pressable style={styles.button} onPress={() => router.back()}>
+      <Pressable style={styles.button} onPress={handleBack}>
         <Text style={styles.buttonText}>Regresar</Text>
       </Pressable>
     </View>
@@ -53,4 +60,4 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "600",
   },
-}); 
+});
